@@ -28,7 +28,7 @@ VOLUME ["/kafka"]
 
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
 
-ADD run-kafka.sh /usr/bin/run-kafka.sh
+ADD run-kafka.rb run-kafka.rb
 
 # Reguired next env variables: KAFKA_CLUSTER_NAME ZK_HOSTS KAFKA_HEAPSIZE KAFKA_BROKERS_COUNT PORT0 PORT1
-CMD run-kafka.sh 
+CMD ruby run-kafka.rb
