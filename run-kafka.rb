@@ -158,6 +158,7 @@ begin
   @kafka_heapsize = ENV['KAFKA_HEAPSIZE']
   @kafka_brokers_count = ENV['KAFKA_BROKERS_COUNT']
   @ports = ENV['PORT0'] + "," + ENV['PORT1']
+  
   broker = Kafka::Broker.new @cluster_name, @zk_hosts, @kafka_heapsize, @kafka_brokers_count, @ports
   # cluster name  => (no whitespaces and special symbols)
   # zk servers  => (e.g. 10.0.0.1:2181,10.0.0.2:2181,10.0.0.3:2181)

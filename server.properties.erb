@@ -84,7 +84,7 @@ log.cleanup.interval.mins=1
 # server. e.g. "127.0.0.1:3000,127.0.0.1:3001,127.0.0.1:3002".
 # You can also append an optional chroot string to the urls to specify the
 # root directory for all kafka znodes.
-zookeeper.connect=<%= @zk_servers %>/kafka-<%= @yaml['cluster'] %>
+zookeeper.connect=<%= @zk_servers %>/kafka-<%= @cluster %>
 
 # Timeout in ms for connecting to zookeeper
 zookeeper.session.timeout.ms=6000
@@ -94,7 +94,7 @@ zookeeper.sync.time.ms=2000
 log.cleanup.policy=delete
 
 kafka.graphite.metrics.host=graphite-di.musta.ch
-kafka.graphite.metrics.prefix=kafka.<%= @yaml['cluster'] %>.<%= @broker_id %>
+kafka.graphite.metrics.prefix=kafka.<%= @cluster %>.<%= @broker_id %>
 kafka.graphite.metrics.reporter.enabled=true
 kafka.metrics.reporters=kafka.metrics.KafkaGraphiteMetricsReporter
 kafka.metrics.polling.interval.secs=60

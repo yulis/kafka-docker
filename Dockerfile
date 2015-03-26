@@ -32,3 +32,4 @@ ADD run-kafka.rb run-kafka.rb
 
 # Reguired next env variables: KAFKA_CLUSTER_NAME ZK_HOSTS KAFKA_HEAPSIZE KAFKA_BROKERS_COUNT PORT0 PORT1
 CMD ruby run-kafka.rb
+ server
