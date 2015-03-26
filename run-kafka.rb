@@ -124,13 +124,13 @@ module Kafka
       env = {
         "KAFKA_HEAP_OPTS" => "-XX:+UseConcMarkSweepGC -XX:+CMSIncrementalMode -Xmx#{@heap_size.to_s}m -Xms#{(@heap_size / 2).to_s}m -XX:NewSize=#{(@heap_size / 3).to_s}m -XX:MaxNewSize=#{(@heap_size / 3).to_s}m -Xss256k -XX:+UseTLAB -XX:+AlwaysPreTouch",
         "SCALA_VERSION" => "2.10.3",
-        "KAFKA_LOG4J_OPTS" => "-Dlog4j.configuration=file:log4j.properties",
+        #"KAFKA_LOG4J_OPTS" => "-Dlog4j.configuration=file:log4j.properties",
         "KAFKA_JVM_PERFORMANCE_OPTS" => "-server -XX:+UseCompressedOops -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:+DisableExplicitGC",
         "JMX_PORT" => @ports[1],
       }
 
-      %x(tar xf kafka-exec.tar.xz)
-      cmd = "./kafka-exec/bin/kafka-run-class.sh -name kafkaServer -loggc kafka.Kafka server.properties".freeze
+      #%x(tar xf kafka-exec.tar.xz)
+      cmd = "$KAFKA_HOME/bin/kafka-run-class.sh -name kafkaServer -loggc kafka.Kafka server.properties".freeze
       last_finished = 0
 
       loop do
