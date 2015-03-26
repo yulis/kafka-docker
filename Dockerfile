@@ -29,4 +29,6 @@ VOLUME ["/kafka"]
 ENV KAFKA_HOME /opt/kafka_${SCALA_VERSION}-${KAFKA_VERSION}
 
 ADD run-kafka.sh /usr/bin/run-kafka.sh
-CMD run-kafka.sh Rillaar "172.17.10.11:2181,172.17.10.12:2181,172.17.10.13:2181" 512 3 "$PORT0,$PORT1"
+
+# Reguired next env variables: KAFKA_CLUSTER_NAME ZK_HOSTS KAFKA_HEAPSIZE KAFKA_BROKERS_COUNT PORT0 PORT1
+CMD run-kafka.sh 
