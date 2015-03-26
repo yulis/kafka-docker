@@ -1,17 +1,15 @@
 require 'zk'
-require 'yaml'
 require 'erb'
 
 module Kafka
   class Broker
-    def initialize(heap_size, broker_count, ports, config)
+    def initialize(cluster_name, zk_servers, heap_size, broker_count, ports)
       @heap_size = heap_size.to_i
       @prng = Random.new(Time.now.to_f * 100000)
 
-      @yaml = YAML.load_file(config)
 
-      @zk_servers = @yaml['zk_hosts'].shuffle.join(',')
-      @cluster = @yaml['cluster']
+      @zk_servers = zk_servers
+      @cluster = cluster_name
 
       zk_connect
 
@@ -155,7 +153,12 @@ module Kafka
 end
 
 begin
-  broker = Kafka::Broker.new ARGV[0], ARGV[1], ARGV[2], ARGV[3]
+  broker = Kafka::Broker.new ARGV[0], ARGV[1], ARGV[2], ARGV[3], ARGV[4]
+  # ARGV[0] => cluster name (no whitespaces and special symbols)
+  # ARGV[1] => zk servers (e.g. 10.0.0.1:2181,10.0.0.2:2181,10.0.0.3:2181)
+  # ARGV[2] => heap size
+  # ARGV[3] => brokers count
+  # ARGV[4] => ports, as [CLIENT_PORT],[JMX_PORT]
   broker.run
 rescue => e
   $stdout.puts $!.inspect, $@
